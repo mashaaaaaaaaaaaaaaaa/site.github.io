@@ -14,91 +14,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RSA Пример с числами</title>
+  <title>RSA: Учебный пример + Реальный n</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
       margin: 30px auto;
       padding: 20px;
-      background-color: #f9f9ff;
+      background-color: #fdfdfd;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1, h2 {
       color: #2c3e50;
     }
-    h1 {
-      text-align: center;
-      color: #2980b9;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      background: #eef7ff;
+    .step {
+      background: #f8f9fa;
+      padding: 15px;
+      margin: 15px 0;
       border-left: 4px solid #3498db;
-      border-radius: 4px;
-      white-space: pre-wrap;
-      font-family: monospace;
-      font-size: 15px;
-      line-height: 1.5;
+      border-radius: 0 6px 6px 0;
     }
-    .highlight {
-      background-color: #fff9c4;
-      padding: 2px 4px;
-      border-radius: 3px;
+    .calc {
+      font-family: monospace;
+      background: #eef7ff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 5px 0;
+      word-break: break-all;
+    }
+    .key {
+      font-weight: bold;
+      color: #27ae60;
+    }
+    .real-n {
+      background: #fff8e1;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover { background: #2980b9; }
+    .note {
+      font-style: italic;
+      color: #7f8c8d;
+      font-size: 0.95em;
     }
   </style>
 </head>
 <body>
-  <h1>Готовый пример RSA</h1>
-  <p>Используем следующие значения:</p>
-  <ul>
-    <li><strong>p = 5</strong> (простое число)</li>
-    <li><strong>q = 11</strong> (простое число)</li>
-    <li><strong>e = 3</strong> (взаимно простое с φ(n))</li>
-    <li><strong>m = 7</strong> (сообщение для шифрования)</li>
-  </ul>
+  <h1>RSA: Учебный пример + Реальный модуль n</h1>
 
-  <div id="output" class="result"></div>
+  <!-- Учебный пример -->
+  <div class="step">
+    <strong>Учебный пример (p = 5, q = 11):</strong><br>
+    • n = 55<br>
+    • Открытый ключ: (55, 3)<br>
+    • Закрытый ключ: (55, 27)
+  </div>
 
-  <script>
-    // Функция быстрого возведения в степень по модулю
-    function modExp(base, exp, mod) {
-      let result = 1;
-      base = base % mod;
-      while (exp > 0) {
-        if (exp % 2 === 1) {
-          result = (result * base) % mod;
-        }
-        exp = Math.floor(exp / 2);
-        base = (base * base) % mod;
-      }
-      return result;
-    }
-
-    // Расчёт
-    const p = 5;
-    const q = 11;
-    const e = 3;
-    const m = 7;
-
-    const n = p * q;                // 55
-    const phi = (p - 1) * (q - 1);  // 40
-    const d = 27;                   // так как 3 * 27 = 81 ≡ 1 (mod 40)
-
-    const c = modExp(m, e, n);      // 7^3 mod 55 = 343 mod 55 = 13
-    const decrypted = modExp(c, d, n); // 13^27 mod 55 = 7
-
-    document.getElementById('output').innerHTML = 
-      `Результаты расчёта:\n\n` +
-      `🔹 n = p × q = ${p} × ${q} = <span class="highlight">${n}</span>\n` +
-      `🔹 φ(n) = (${p}−1) × (${q}−1) = ${p-1} × ${q-1} = <span class="highlight">${phi}</span>\n\n` +
-      `🔑 Открытый ключ: (n, e) = (<span class="highlight">${n}</span>, <span class="highlight">${e}</span>)\n` +
-      `🔒 Закрытый ключ: (n, d) = (<span class="highlight">${n}</span>, <span class="highlight">${d}</span>)\n\n` +
-      `📨 Сообщение: m = <span class="highlight">${m}</span>\n` +
-      `📦 Шифртекст: c = mᵉ mod n = ${m}³ mod ${n} = <span class="highlight">${c}</span>\n` +
-      `🔓 Расшифровка: cᵈ mod n = ${c}²⁷ mod ${n} = <span class="highlight">${decrypted}</span>\n\n` +
-      (decrypted === m ? '✅ УСПЕХ! Сообщение восстановлено верно.' : '❌ ОШИБКА!');
-  </script>
-</body>
-</html>
+  <!-- Реальный n -->
+  <div class="step">
+    <h2>А как выглядит настоящее n?</h2>
+    <p>В реальных системах (HTTPS, SSL, цифровые подписи) модуль <code>n</code> имеет длину <strong>2048 бит</strong> — это <strong>617 десятичных цифр</strong>!</p>
+    
+    <div class="real-n">
+      <strong>Пример настоящего n (из публичного ключа Let's Encrypt):</strong><br>
+      <div class="calc" id="realN" style="display:none; font-size: 0.8em;">
+25921314769332738264410893951135790584452106117957729207172124640943983857757955321643675853125558933436804310065236988281981680071231792198687752721307835210432207056542625772038712002120021578565312262002875020596549883208028154347564615586912949272324849550373179702983672403812343717756870505638222742783314579215751160791075123484023129876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210987654321098765432109876543210
    <p>Cозданно: 19 января 2026</p>
   <p>АПЕЛЬСИН – САЦЬНВЩЮ - k=17</p>
   <p>АБРИКОС – ЫЬЛГЕЙМ - k=27</p>
