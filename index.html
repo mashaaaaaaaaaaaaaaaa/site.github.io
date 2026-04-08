@@ -8,6 +8,361 @@
   <title>Привет мир</title>
 </head>
 <body>
+  <h>Созданно 8 апреля 2026</h>
+  <p><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модель данных медицинской системы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #2a5298;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .diagram-container {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .entity-card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        .entity-card h3 {
+            color: #2a5298;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .entity-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .entity-card li {
+            padding: 5px 0;
+            color: #555;
+        }
+        
+        .entity-card li:before {
+            content: "▸ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .pk {
+            background: #ffd700;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        .fk {
+            background: #ff6b6b;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+        
+        footer {
+            background: #2a5298;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Медицинская информационная система</h1>
+            <p>ER-диаграмма базы данных</p>
+        </header>
+        
+        <div class="content">
+            <!-- Диаграмма -->
+            <div class="section">
+                <h2>📊 Модель данных</h2>
+                <div class="diagram-container">
+                    <img src="/home/user/Изображения/надо.png" alt="ER-диаграмма медицинской системы">
+                    <p style="margin-top: 15px; color: #666; font-style: italic;">
+                        Схема базы данных: Хирурги, Пациенты, Операции, Лекарства
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Описание сущностей -->
+            <div class="section">
+                <h2>🗂️ Сущности базы данных</h2>
+                
+                <div class="entity-card">
+                    <h3>👨‍⚕️ Surgeon (Хирург)</h3>
+                    <ul>
+                        <li><span class="pk">PK</span> surgeon_id — уникальный идентификатор</li>
+                        <li>first_name — имя</li>
+                        <li>last_name — фамилия</li>
+                        <li>specialization — специализация</li>
+                        <li>license_number — номер лицензии</li>
+                    </ul>
+                </div>
+                
+                <div class="entity-card">
+                    <h3>👤 Patient (Пациент)</h3>
+                    <ul>
+                        <li><span class="pk">PK</span> patient_id — уникальный идентификатор</li>
+                        <li>first_name — имя</li>
+                        <li>last_name — фамилия</li>
+                        <li>date_of_birth — дата рождения</li>
+                        <li>blood_type — группа крови</li>
+                        <li>insurance_policy — страховой полис</li>
+                    </ul>
+                </div>
+                
+                <div class="entity-card">
+                    <h3>🔪 Surgery (Операция)</h3>
+                    <ul>
+                        <li><span class="pk">PK</span> surgery_id — уникальный идентификатор</li>
+                        <li><span class="fk">FK</span> surgeon_id — ссылка на хирурга</li>
+                        <li><span class="fk">FK</span> patient_id — ссылка на пациента</li>
+                        <li>surgery_date — дата и время операции</li>
+                        <li>diagnosis — диагноз</li>
+                        <li>status — статус</li>
+                    </ul>
+                </div>
+                
+                <div class="entity-card">
+                    <h3>💊 Medicine (Лекарство)</h3>
+                    <ul>
+                        <li><span class="pk">PK</span> medicine_id — уникальный идентификатор</li>
+                        <li>trade_name — торговое название</li>
+                        <li>active_substance — действующее вещество</li>
+                        <li>dosage_form — форма выпуска</li>
+                    </ul>
+                </div>
+                
+                <div class="entity-card">
+                    <h3>🔗 Surgery_Medicine_Link (Назначения)</h3>
+                    <ul>
+                        <li><span class="pk">PK</span> link_id — уникальный идентификатор</li>
+                        <li><span class="fk">FK</span> surgery_id — ссылка на операцию</li>
+                        <li><span class="fk">FK</span> medicine_id — ссылка на лекарство</li>
+                        <li>dosage — дозировка</li>
+                        <li>frequency — частота приёма</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Примеры данных -->
+            <div class="section">
+                <h2>📋 Примеры данных</h2>
+                
+                <h3 style="color: #2a5298; margin: 20px 0 10px 0;">👨‍⚕️ Хирурги</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Специализация</th>
+                            <th>Лицензия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Анна</td>
+                            <td>Петрова</td>
+                            <td>Кардиохирург</td>
+                            <td>LIC-RU-2019-4521</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Дмитрий</td>
+                            <td>Соколов</td>
+                            <td>Нейрохирург</td>
+                            <td>LIC-RU-2020-8834</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="color: #2a5298; margin: 20px 0 10px 0;">👤 Пациенты</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Дата рождения</th>
+                            <th>Группа крови</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>Елена</td>
+                            <td>Козлова</td>
+                            <td>1978-05-12</td>
+                            <td>A+</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>Игорь</td>
+                            <td>Морозов</td>
+                            <td>1965-11-30</td>
+                            <td>O-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="color: #2a5298; margin: 20px 0 10px 0;">🔪 Операции</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Хирург</th>
+                            <th>Пациент</th>
+                            <th>Дата</th>
+                            <th>Диагноз</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1001</td>
+                            <td>Петрова А.</td>
+                            <td>Козлова Е.</td>
+                            <td>2026-04-15 09:00</td>
+                            <td>Стеноз аортального клапана</td>
+                        </tr>
+                        <tr>
+                            <td>1002</td>
+                            <td>Соколов Д.</td>
+                            <td>Морозов И.</td>
+                            <td>2026-04-20 14:30</td>
+                            <td>Глиобластома</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Медицинская информационная система | ER-диаграмма</p>
+        </footer>
+    </div>
+</body>
+</html></p>
   <h>Созданно 30 марта 2026</h>
   <p>Ошибка на обучении (MSE): 0.004359
 Ошибка на тесте (MSE): 0.003872
