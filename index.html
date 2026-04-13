@@ -12,6 +12,110 @@
   <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦷 Стоматология: База данных</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; padding: 0; color: #333; }
+    header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }
+    h1 { margin: 0; font-size: 1.5rem; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    
+    /* Сетка для карточек */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+    
+    .card { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
+    .card-header { padding: 15px; background: #ecf0f1; border-bottom: 1px solid #ddd; }
+    .card-header h3 { margin: 0; font-size: 1.1rem; color: #2c3e50; }
+    
+    .iframe-container { width: 100%; height: 400px; position: relative; background: #fafafa; }
+    .iframe-container iframe { width: 100%; height: 100%; border: none; }
+    
+    .card-actions { padding: 10px 15px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+    .btn { padding: 6px 12px; background: #3498db; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
+    .btn:hover { background: #2980b9; }
+    .btn-raw { background: #95a5a6; }
+    .btn-raw:hover { background: #7f8c8d; }
+    
+    footer { text-align: center; padding: 2rem; color: #7f8c8d; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🦷 Проектирование БД: Стоматологическое отделение</h1>
+  <p>Иерархические модели и схемы индексации (draw.io)</p>
+</header>
+
+<div class="container">
+  <div class="grid" id="diagram-grid">
+    <!-- Карточки будут добавлены сюда через JavaScript -->
+  </div>
+</div>
+
+<footer>
+  <p>Создано для GitHub Pages • Файлы хранятся в репозитории</p>
+</footer>
+
+<script>
+  // === НАСТРОЙКИ ===
+  // Скрипт сам определит логин и репозиторий из URL страницы
+  const pathParts = window.location.pathname.split('/').filter(p => p);
+  const username = window.location.hostname.split('.')[0]; // Берем username из username.github.io
+  const repo = pathParts[0] || ''; // Берем имя репозитория из пути
+  
+  // Формируем базовую ссылку на RAW файлы
+  // Важно: ветка по умолчанию обычно main или master
+  const branch = 'main'; 
+  
+  // Список ваших файлов (название для карточки : имя файла)
+  const files = [
+    { title: "🗂️ 1. Общая иерархическая модель", file: "diagrams/hierarchical_model.drawio.xml" },
+    { title: "👨‍⚕️ 2. Врач: Основной индекс", file: "diagrams/doctor_primary_index.drawio.xml" },
+    { title: "👩‍️ 3. Медсестра: Основной индекс", file: "diagrams/nurse_primary_index.drawio.xml" },
+    { title: "🔪 4. Операция: Основной индекс", file: "diagrams/operation_primary_index.drawio.xml" },
+    { title: "👨‍⚕️ 5. Врач: Вторичные индексы", file: "diagrams/doctor_secondary_indexes.drawio.xml" },
+    { title: "👩‍⚕️ 6. Медсестра: Вторичные индексы", file: "diagrams/nurse_secondary_indexes.drawio.xml" },
+    { title: "🔪 7. Операция: Вторичные индексы", file: "diagrams/operation_secondary_indexes.drawio.xml" }
+  ];
+
+  const grid = document.getElementById('diagram-grid');
+
+  files.forEach(item => {
+    // Формируем прямую ссылку на RAW файл GitHub
+    const rawUrl = `https://raw.githubusercontent.com/${username}/${repo}/${branch}/${item.file}`;
+    
+    // Кодируем URL для вставки в viewer
+    const encodedRawUrl = encodeURIComponent(rawUrl);
+    const viewerUrl = `https://viewer.diagrams.net/?embed=1#U${encodedRawUrl}`;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <h3>${item.title}</h3>
+      </div>
+      <div class="iframe-container">
+        <!-- Используем onload для удаления прелоадера, если нужно, но пока просто src -->
+        <iframe src="${viewerUrl}" loading="lazy" title="${item.title}"></iframe>
+      </div>
+      <div class="card-actions">
+        <span style="font-size: 0.8rem; color: #777;">XML файл</span>
+        <div>
+          <a href="${item.file}" class="btn btn-raw" target="_blank">📄 Открыть XML</a>
+          <a href="${item.file}" class="btn" download>⬇️ Скачать</a>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🦷 База данных: Стоматологическое отделение</title>
