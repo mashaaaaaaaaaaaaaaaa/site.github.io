@@ -8,6 +8,320 @@
   <title>Привет мир</title>
 </head>
 <body>
+  <h>Созданно 13 апреля 2026</h>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🦷 База данных: Стоматологическое отделение</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    header p { opacity: 0.9; font-size: 1rem; }
+    
+    nav {
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav button {
+      padding: 0.6rem 1.2rem;
+      border: 2px solid #667eea;
+      background: white;
+      color: #667eea;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    nav button:hover, nav button.active {
+      background: #667eea;
+      color: white;
+    }
+    
+    main {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .diagram-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .diagram-container.active { display: block; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .diagram-header {
+      padding: 1rem 1.5rem;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .diagram-header h3 { color: #667eea; font-size: 1.2rem; }
+    .diagram-header a {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .diagram-header a:hover { text-decoration: underline; }
+    
+    .iframe-wrapper {
+      width: 100%;
+      height: 700px;
+      background: #fafafa;
+    }
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    .info-panel {
+      padding: 1rem 1.5rem;
+      background: #e8f4fd;
+      border-left: 4px solid #667eea;
+      font-size: 0.95rem;
+    }
+    .info-panel code {
+      background: #fff;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 3rem;
+    }
+    
+    /* Адаптив */
+    @media (max-width: 768px) {
+      .iframe-wrapper { height: 500px; }
+      nav { flex-direction: column; }
+      nav button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🦷 Стоматологическое отделение</h1>
+  <p>Проектирование базы данных: сущности, индексы, иерархия</p>
+</header>
+
+<nav id="nav">
+  <button class="active" data-target="hierarchical">🗂️ Иерархическая модель</button>
+  <button data-target="doctor-primary">👨‍⚕️ Врач: основной индекс</button>
+  <button data-target="nurse-primary">👩‍⚕️ Медсестра: основной индекс</button>
+  <button data-target="operation-primary">🔪 Операция: основной индекс</button>
+  <button data-target="doctor-secondary">👨‍⚕️ Врач: вторичные индексы</button>
+  <button data-target="nurse-secondary">👩‍⚕️ Медсестра: вторичные индексы</button>
+  <button data-target="operation-secondary">🔪 Операция: вторичные индексы</button>
+</nav>
+
+<main>
+
+  <!-- 1. Иерархическая модель -->
+  <section id="hierarchical" class="diagram-container active">
+    <div class="diagram-header">
+      <h3>🗂️ Общая иерархическая модель</h3>
+      <a href="diagrams/hierarchical_model.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Fhierarchical_model.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Описание:</strong> Модель показывает связь абстрактной сущности <code>MedicalSystem</code> с конкретными сущностями: Врач, Медсестра, Операция.
+    </div>
+  </section>
+
+  <!-- 2. Врач: основной индекс -->
+  <section id="doctor-primary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>👨‍⚕️ Врач: основной индекс (B-Tree по doctor_id)</h3>
+      <a href="diagrams/doctor_primary_index.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Fdoctor_primary_index.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Запрос:</strong> <code>SELECT * FROM doctor;</code><br>
+      ⚡ Поиск по PRIMARY KEY: сложность O(log n)
+    </div>
+  </section>
+
+  <!-- 3. Медсестра: основной индекс -->
+  <section id="nurse-primary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>👩‍⚕️ Медсестра: основной индекс (B-Tree по nurse_id)</h3>
+      <a href="diagrams/nurse_primary_index.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Fnurse_primary_index.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Запрос:</strong> <code>SELECT * FROM nurse;</code><br>
+      📊 Кластеризованное хранение по первичному ключу
+    </div>
+  </section>
+
+  <!-- 4. Операция: основной индекс -->
+  <section id="operation-primary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>🔪 Операция: основной индекс (B-Tree по operation_id)</h3>
+      <a href="diagrams/operation_primary_index.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Foperation_primary_index.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Запрос:</strong> <code>SELECT * FROM operation;</code><br>
+      🔄 Поддерживает диапазонные запросы по стоимости
+    </div>
+  </section>
+
+  <!-- 5. Врач: вторичные индексы -->
+  <section id="doctor-secondary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>👨‍⚕️ Врач: вторичные индексы (3 шт.)</h3>
+      <a href="diagrams/doctor_secondary_indexes.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Fdoctor_secondary_indexes.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Индексы:</strong><br>
+      • <code>IDX_specialization</code> — поиск по специализации (B-Tree)<br>
+      • <code>IDX_full_name</code> — сортировка по ФИО (B-Tree)<br>
+      • <code>IDX_phone</code> — быстрый поиск по телефону (Hash)
+    </div>
+  </section>
+
+  <!-- 6. Медсестра: вторичные индексы -->
+  <section id="nurse-secondary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>👩‍⚕️ Медсестра: вторичные индексы (3 шт.)</h3>
+      <a href="diagrams/nurse_secondary_indexes.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Fnurse_secondary_indexes.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Индексы:</strong><br>
+      • <code>IDX_category</code> — фильтрация по разряду (Bitmap)<br>
+      • <code>IDX_full_name</code> — алфавитный поиск (B-Tree)<br>
+      • <code>IDX_shift</code> — выбор по смене (Bitmap)
+    </div>
+  </section>
+
+  <!-- 7. Операция: вторичные индексы -->
+  <section id="operation-secondary" class="diagram-container">
+    <div class="diagram-header">
+      <h3>🔪 Операция: вторичные индексы (3 шт.)</h3>
+      <a href="diagrams/operation_secondary_indexes.drawio.xml" download>⬇️ Скачать XML</a>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe src="https://viewer.diagrams.net/?embed=1#Uhttps%3A%2F%2FYOUR-DOMAIN.COM%2Fdental-db%2Fdiagrams%2Foperation_secondary_indexes.drawio.xml" allowfullscreen></iframe>
+    </div>
+    <div class="info-panel">
+      💡 <strong>Индексы:</strong><br>
+      • <code>IDX_complexity</code> — фильтрация по сложности (Bitmap)<br>
+      • <code>IDX_cost</code> — диапазонный поиск по цене (B-Tree)<br>
+      • <code>IDX_operation_name</code> — поиск по названию (B-Tree)
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🦷 Стоматологическое отделение • Проект БД • 2026</p>
+  <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #999;">
+    Диаграммы созданы в <a href="https://draw.io" target="_blank">draw.io</a> • 
+    <a href="#" onclick="window.print(); return false;">🖨️ Версия для печати</a>
+  </p>
+</footer>
+
+<script>
+  // Переключение вкладок
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Убираем active у всех
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.diagram-container').forEach(c => c.classList.remove('active'));
+      
+      // Добавляем active к выбранному
+      btn.classList.add('active');
+      const target = btn.getAttribute('data-target');
+      document.getElementById(target).classList.add('active');
+      
+      // Плавная прокрутка к диаграмме
+      document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Оптимизация: ленивая загрузка iframe (загружаем только при активации)
+  document.querySelectorAll('.iframe-wrapper iframe').forEach(iframe => {
+    const src = iframe.getAttribute('src');
+    iframe.removeAttribute('src'); // отключаем автозагрузку
+    
+    // Наблюдатель за видимостью
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !iframe.getAttribute('src')) {
+          iframe.setAttribute('src', src);
+          observer.unobserve(iframe);
+        }
+      });
+    }, { rootMargin: '100px' });
+    
+    observer.observe(iframe);
+  });
+</script>
+
+</body>
+</html>
   <h>Созданно 8 апреля 2026</h>
 <img src="file:///home/user/Изображения/надо.png" alt="Описание картинки">
   <h>Созданно 30 марта 2026</h>
